@@ -12,6 +12,7 @@ function App() {
 	let [password, setPassword] = useState("heckheck")
 	let [email, setEmail] = useState("heck@gmail.com")
 	let [beltRank, setBeltRank] = useState("blue")
+	let [errorVisible, setErrorVisible] = useState("none")
 	let theme = createTheme({
 		typography: {
 			body1: { color: "#FFFFFF" },
@@ -47,6 +48,7 @@ function App() {
 		if (isValid) {
 			window.alert("this will log you in one day")
 		} else {
+			setErrorVisible("")
 			userDataBad(userData.name)
 		}
 	}
@@ -89,6 +91,7 @@ function App() {
 				{/* <HorizontalErrorDiv> */}
 				<ErrorAlert
 					message={"The information entered is not valid, please resubmit."}
+					errorVisible={errorVisible}
 				></ErrorAlert>
 				{/* </HorizontalErrorDiv> */}
 			</>
