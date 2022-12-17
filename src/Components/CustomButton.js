@@ -11,10 +11,10 @@ export default function CustomButton(props) {
 			variant="contained"
 			sx={{ bgcolor: theme.palette.secondary.main, margin: 1 }}
 			onClick={() => {
-				props.createUser()
+				props.function()
 			}}
 		>
-			Submit
+			{props.buttonText}
 		</Button>
 	)
 }

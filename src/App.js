@@ -1,15 +1,17 @@
-import React, { useState } from "react"
+import React, { useState, useRef } from "react"
 import { createTheme, ThemeProvider } from "@mui/material/styles"
 import "./App.css"
 import Input from "./Components/Input"
-import Div from "./Components/Div"
+import Div, { HorizontalDiv, HorizontalErrorDiv } from "./Components/Div"
 import CustomButton from "./Components/CustomButton"
 import { ValidateUser } from "./ValidateUser"
+import ErrorAlert from "./Components/CustomAlert"
 function App() {
-	let [name, setName] = useState()
-	let [password, setPassword] = useState()
-	let [email, setEmail] = useState()
-	let [beltRank, setBeltRank] = useState()
+	// TODO one day delete the defaults below
+	let [name, setName] = useState("heck")
+	let [password, setPassword] = useState("heckheck")
+	let [email, setEmail] = useState("heck@gmail.com")
+	let [beltRank, setBeltRank] = useState("blue")
 	let theme = createTheme({
 		typography: {
 			body1: { color: "#FFFFFF" },
@@ -22,9 +24,8 @@ function App() {
 			third: { main: "#FFFFFF" },
 		},
 	})
-
+	// add a setTimeout to mimic server response time
 	let createUser = async (e) => {
-		// ValidateUser()
 		let userData = {
 			name: name,
 			email: email,
@@ -34,11 +35,29 @@ function App() {
 		let isValid = await ValidateUser.isValid(userData)
 		console.log(isValid)
 	}
-	// name, password, email, beltRank
+	let logIn = async (e) => {
+		let userData = {
+			name: name,
+			email: email,
+			password: password,
+			beltRank: beltRank,
+		}
+		let isValid = await ValidateUser.isValid(userData)
+		console.log(isValid)
+		if (isValid) {
+			window.alert("this will log you in one day")
+		} else {
+			userDataBad(userData.name)
+		}
+	}
+	let userDataBad = (name) => {
+		console.log("userDataBad App.js", name)
+	}
 	return (
 		<ThemeProvider theme={theme}>
 			<>
 				<Div>
+					<h1>heck</h1>
 					<Input
 						placeholder={"name"}
 						userInfo={name}
@@ -59,11 +78,19 @@ function App() {
 						userInfo={beltRank}
 						setUserInfo={setBeltRank}
 					></Input>
-					<CustomButton
-						createUser={createUser}
-						// onClick={createUser}
-					></CustomButton>
 				</Div>
+				<HorizontalDiv>
+					<CustomButton
+						function={createUser}
+						buttonText={"Sign UP"}
+					></CustomButton>
+					<CustomButton function={logIn} buttonText={"Log In"}></CustomButton>
+				</HorizontalDiv>
+				{/* <HorizontalErrorDiv> */}
+				<ErrorAlert
+					message={"The information entered is not valid, please resubmit."}
+				></ErrorAlert>
+				{/* </HorizontalErrorDiv> */}
 			</>
 		</ThemeProvider>
 	)

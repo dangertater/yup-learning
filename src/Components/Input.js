@@ -4,6 +4,7 @@ import { styled, useTheme } from "@mui/material/styles"
 let StyledInput = styled("input")`
 	margin: 4px;
 	border-radius: 7px;
+	color: white;
 	&::placeholder {
 		color: white;
 	}
