@@ -6,6 +6,7 @@ import Div, { HorizontalDiv, HorizontalErrorDiv } from "./Components/Div"
 import CustomButton from "./Components/CustomButton"
 import { ValidateUser } from "./ValidateUser"
 import ErrorAlert from "./Components/CustomAlert"
+import { signUpFunc } from "./Context/AuthContext.js"
 function App() {
 	// TODO one day delete the defaults below
 	let [name, setName] = useState("heck")
