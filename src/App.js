@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react"
+import React, { useState } from "react"
 import { createTheme, ThemeProvider } from "@mui/material/styles"
 import "./App.css"
 import Input from "./Components/Input"
@@ -88,12 +88,12 @@ function App() {
 					></CustomButton>
 					<CustomButton function={logIn} buttonText={"Log In"}></CustomButton>
 				</HorizontalDiv>
-				{/* <HorizontalErrorDiv> */}
-				<ErrorAlert
-					message={"The information entered is not valid, please resubmit."}
-					errorVisible={errorVisible}
-				></ErrorAlert>
-				{/* </HorizontalErrorDiv> */}
+				<HorizontalErrorDiv>
+					<ErrorAlert
+						message={"The information entered is not valid, please resubmit."}
+						errorVisible={errorVisible}
+					></ErrorAlert>
+				</HorizontalErrorDiv>
 			</>
 		</ThemeProvider>
 	)

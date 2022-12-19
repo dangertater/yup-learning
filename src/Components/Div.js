@@ -28,5 +28,5 @@ export function HorizontalDiv({ children }) {
 }
 
 export function HorizontalErrorDiv({ children }) {
-	return <HorizontalStyledDiv>{children}</HorizontalStyledDiv>
+	return <HorizontalErrorStyledDiv>{children}</HorizontalErrorStyledDiv>
 }
