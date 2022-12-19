@@ -1,6 +1,7 @@
 import React from "react"
 import { Button } from "@mui/material"
 import { useTheme } from "@mui/material/styles"
+import Fade from "@mui/material/Fade"
 
 export default function CustomButton(props) {
 	let theme = useTheme()

@@ -17,6 +17,8 @@ let HorizontalErrorStyledDiv = styled("div")`
 	flex-direction: row;
 	justify-content: center;
 	margin-top: 4px;
+	margin-right: 4px;
+	margin-left: 4px;
 `
 
 export default function Div({ children }) {
@@ -28,5 +30,5 @@ export function HorizontalDiv({ children }) {
 }
 
 export function HorizontalErrorDiv({ children }) {
-	return <HorizontalStyledDiv>{children}</HorizontalStyledDiv>
+	return <HorizontalErrorStyledDiv>{children}</HorizontalErrorStyledDiv>
 }

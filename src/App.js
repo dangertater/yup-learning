@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react"
+import React, { useState, useRef, createContext } from "react"
 import { createTheme, ThemeProvider } from "@mui/material/styles"
 import "./App.css"
 import Input from "./Components/Input"
@@ -6,6 +6,7 @@ import Div, { HorizontalDiv, HorizontalErrorDiv } from "./Components/Div"
 import CustomButton from "./Components/CustomButton"
 import { ValidateUser } from "./ValidateUser"
 import ErrorAlert from "./Components/CustomAlert"
+import TestDivDeleteMe from "./Components/TestDivDeleteMe"
 function App() {
 	// TODO one day delete the defaults below
 	let [name, setName] = useState("heck")
@@ -13,6 +14,8 @@ function App() {
 	let [email, setEmail] = useState("heck@gmail.com")
 	let [beltRank, setBeltRank] = useState("blue")
 	let [errorVisible, setErrorVisible] = useState("none")
+	let [testBoxStateDelete, setTestBoxStateDelete] = useState("none")
+	const UserContext = createContext()
 	let theme = createTheme({
 		typography: {
 			body1: { color: "#FFFFFF" },
@@ -35,6 +38,11 @@ function App() {
 		}
 		let isValid = await ValidateUser.isValid(userData)
 		console.log(isValid)
+		if (isValid) {
+			window.alert("this will sign you up on day")
+		} else {
+			setErrorVisible("")
+		}
 	}
 	let logIn = async (e) => {
 		let userData = {
@@ -84,16 +92,27 @@ function App() {
 				<HorizontalDiv>
 					<CustomButton
 						function={createUser}
-						buttonText={"Sign UP"}
+						buttonText={"Sign Up"}
 					></CustomButton>
 					<CustomButton function={logIn} buttonText={"Log In"}></CustomButton>
 				</HorizontalDiv>
-				{/* <HorizontalErrorDiv> */}
-				<ErrorAlert
-					message={"The information entered is not valid, please resubmit."}
-					errorVisible={errorVisible}
-				></ErrorAlert>
-				{/* </HorizontalErrorDiv> */}
+				<HorizontalErrorDiv>
+					<ErrorAlert
+						message={"The information entered is not valid, please resubmit."}
+						errorVisible={errorVisible}
+					></ErrorAlert>
+				</HorizontalErrorDiv>
+				<UserContext
+					value={
+						((testBoxStateDelete = { testBoxStateDelete }),
+						(setTestBoxStateDelete = { setTestBoxStateDelete }))
+					}
+				>
+					<TestDivDeleteMe
+					// testBoxStateDelete={testBoxStateDelete}
+					// setTestBoxStateDelete={setTestBoxStateDelete}
+					></TestDivDeleteMe>
+				</UserContext>
 			</>
 		</ThemeProvider>
 	)
