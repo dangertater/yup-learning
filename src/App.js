@@ -5,13 +5,14 @@ import Input from "./Components/Input"
 import Div, { HorizontalDiv, HorizontalErrorDiv } from "./Components/Div"
 import CustomButton from "./Components/CustomButton"
 import { ValidateUser } from "./ValidateUser"
-import ErrorAlert from "./Components/CustomAlert"
+import { ErrorAlert } from "./Components/CustomAlert"
 function App() {
 	// TODO one day delete the defaults below
 	let [name, setName] = useState("heck")
 	let [password, setPassword] = useState("heckheck")
 	let [email, setEmail] = useState("heck@gmail.com")
 	let [beltRank, setBeltRank] = useState("blue")
+	// TOD default of errorVisible should be 'none'
 	let [errorVisible, setErrorVisible] = useState("none")
 	let theme = createTheme({
 		typography: {
@@ -35,6 +36,11 @@ function App() {
 		}
 		let isValid = await ValidateUser.isValid(userData)
 		console.log(isValid)
+		if (isValid) {
+			window.alert("this will sign you up one day")
+		} else {
+			setErrorVisible("")
+		}
 	}
 	let logIn = async (e) => {
 		let userData = {

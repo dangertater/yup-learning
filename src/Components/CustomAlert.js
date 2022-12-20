@@ -1,10 +1,17 @@
 import React from "react"
-import { Stack, Alert } from "@mui/material"
+import { Alert } from "@mui/material"
+import { Slide } from "@mui/material"
 
 let StyledAlert = (props) => {
 	console.log("styledAlert props", props)
+	let heck = "asdf"
+	if (props.errorVisible === "none") {
+		heck = false
+	} else {
+		heck = true
+	}
 	return (
-		<Stack spacing={2}>
+		<Slide direction="up" in={heck} mountOnEnter unmountOnExit>
 			<Alert
 				variant="filled"
 				severity="error"
@@ -12,10 +19,10 @@ let StyledAlert = (props) => {
 			>
 				{props.message}
 			</Alert>
-		</Stack>
+		</Slide>
 	)
 }
-export default function ErrorAlert(props) {
+export function ErrorAlert(props) {
 	return (
 		<StyledAlert
 			message={props.message}
