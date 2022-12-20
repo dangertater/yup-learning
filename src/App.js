@@ -35,7 +35,6 @@ function App() {
 			beltRank: beltRank,
 		}
 		let isValid = await ValidateUser.isValid(userData)
-		console.log(isValid)
 		if (isValid) {
 			window.alert("this will sign you up one day")
 		} else {
@@ -50,7 +49,6 @@ function App() {
 			beltRank: beltRank,
 		}
 		let isValid = await ValidateUser.isValid(userData)
-		console.log(isValid)
 		if (isValid) {
 			window.alert("this will log you in one day")
 		} else {
