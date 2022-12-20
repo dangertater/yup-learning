@@ -1,6 +1,6 @@
 import React, { useEffect } from "react"
 import { Alert } from "@mui/material"
-import { Slide } from "@mui/material"
+import { Slide, Fade } from "@mui/material"
 
 let StyledAlert = (props) => {
 	let variableForSlideInProp = null
@@ -15,32 +15,32 @@ let StyledAlert = (props) => {
 	// if i force a rerender it disappears which makes sense
 	// so i need to
 
-	// HERE update with useRef!
-	useEffect(() => {
-		setTimeout(() => {
-			errorDirection = "down"
-			variableForSlideInProp = false
-		}, 2000)
-	}, [variableForSlideInProp])
-	// setTimeout(() => {
-	// 	props.setErrorVisible("none")
-	// }, 2000)
-
 	return (
-		<Slide
-			direction={`${errorDirection}`}
-			in={variableForSlideInProp}
-			mountOnEnter
-			unmountOnExit
-		>
-			<Alert
-				variant="filled"
-				severity="error"
-				sx={{ display: `${props.errorVisible}` }}
+		<>
+			<Slide
+				direction={`${errorDirection}`}
+				in={variableForSlideInProp}
+				mountOnEnter
+				unmountOnExit
 			>
-				{props.message}
-			</Alert>
-		</Slide>
+				<Alert
+					variant="filled"
+					severity="error"
+					sx={{ display: `${props.errorVisible}` }}
+				>
+					{props.message}
+				</Alert>
+			</Slide>
+			<Fade>
+				<Alert
+					variant="filled"
+					severity="error"
+					sx={{ display: `${props.errorVisible}` }}
+				>
+					{props.message}
+				</Alert>
+			</Fade>
+		</>
 	)
 }
 export function ErrorAlert(props) {
