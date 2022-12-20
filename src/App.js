@@ -98,6 +98,7 @@ function App() {
 					<ErrorAlert
 						message={"The information entered is not valid, please resubmit."}
 						errorVisible={errorVisible}
+						setErrorVisible={setErrorVisible}
 					></ErrorAlert>
 				</HorizontalErrorDiv>
 			</>

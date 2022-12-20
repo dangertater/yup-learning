@@ -4,14 +4,18 @@ import { Slide } from "@mui/material"
 
 let StyledAlert = (props) => {
 	console.log("styledAlert props", props)
-	let heck = "asdf"
+	let variableForInProp = null
+	let errorDirection = "up"
 	if (props.errorVisible === "none") {
-		heck = false
+		variableForInProp = false
 	} else {
-		heck = true
+		variableForInProp = true
 	}
+	setTimeout(() => {
+		props.setErrorVisible("none")
+	}, 1000)
 	return (
-		<Slide direction="up" in={heck} mountOnEnter unmountOnExit>
+		<Slide direction="up" in={variableForInProp} mountOnEnter unmountOnExit>
 			<Alert
 				variant="filled"
 				severity="error"
@@ -27,6 +31,7 @@ export function ErrorAlert(props) {
 		<StyledAlert
 			message={props.message}
 			errorVisible={props.errorVisible}
+			setErrorVisible={props.setErrorVisible}
 		></StyledAlert>
 	)
 }
