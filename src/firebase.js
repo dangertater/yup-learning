@@ -2,16 +2,14 @@ import { initializeApp } from "firebase/app"
 import "firebase/auth"
 
 let app = initializeApp({
-	apiKey: process.env.REACT_APP_apiKey,
-	authDomain: process.env.REACT_APP_authDomain,
-	projectId: process.env.REACT_APP_projectId,
-	storageBucket: process.env.REACT_APP_storageBucket,
-	messagingSenderId: process.env.REACT_APP_messagingSenderId,
-	appId: process.env.REACT_APP_appId,
-	measurementId: process.env.REACT_APP_measurementId,
+	apiKey: "AIzaSyDJk14QjE1XUKfVAkK2eJrRt9k9nN3PjQw",
+	authDomain: "coach-groupon.firebaseapp.com",
+	projectId: "coach-groupon",
+	storageBucket: "coach-groupon.appspot.com",
+	messagingSenderId: "103305585378",
+	appId: "1:103305585378:web:79d393434d5e7b58ea74bb",
+	measurementId: "G-3MQQMFRZW7",
 })
-
-export const auth = app
 export default app
 // 'the reason we did it this way is because it is easy to switch between
 //----development and production apps without recoding

@@ -1,22 +1,28 @@
+import { getAuth } from "firebase/auth"
 import React, { useState, useContext, useEffect } from "react"
-import { auth } from "../firebase"
-
+import app from "../firebase"
 let AuthContext = React.createContext()
 
-let useAuth = () => {
+export let useAuth = () => {
 	useContext(AuthContext)
+}
+export let signUpFunc = (userData) => {
+	getAuth()
+		.createUser(userData)
+		.then((userRecord) => {
+			console.log(`created user ${userRecord.email}`)
+		})
+		.catch((error) => {
+			console.log("error", error)
+		})
 }
 export default function AuthProvider(props) {
 	let [theUser, setTheUser] = useState()
 
-	let signUpFunc = (name, password, email, beltRank) => {
-		return auth.createUser(name, password, email, beltRank)
-	}
-
 	useEffect(() => {
-		// 'unsubscribe' is there because the 'auth.onAuthStateChange' returns a method that when called it will "unsubscibe the OnAuth event"
+		// 'unsubscribe' is there because the 'app.onAuthStateChange' returns a method that when called it will "unsubscibe the OnAuth event"
 		//https://www.youtube.com/watch?v=PKwu15ldZ7k&t=706s at 20:00
-		const unsubscribe = auth.onAuthStateChange((user) => {
+		const unsubscribe = app.onAuthStateChange((user) => {
 			setTheUser(user)
 		})
 		return unsubscribe

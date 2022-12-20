@@ -6,7 +6,8 @@ import Div, { HorizontalDiv, HorizontalErrorDiv } from "./Components/Div"
 import CustomButton from "./Components/CustomButton"
 import { ValidateUser } from "./ValidateUser"
 import ErrorAlert from "./Components/CustomAlert"
-import { signUpFunc } from "./Context/AuthContext.js"
+import AuthProvider, { useAuth, signUpFunc } from "./Context/AuthContext.js"
+
 function App() {
 	// TODO one day delete the defaults below
 	let [name, setName] = useState("heck")
@@ -26,6 +27,7 @@ function App() {
 			third: { main: "#FFFFFF" },
 		},
 	})
+	// let { signUpFunc } = useAuth()
 	// add a setTimeout to mimic server response time
 	let createUser = async (e) => {
 		let userData = {
@@ -34,8 +36,11 @@ function App() {
 			password: password,
 			beltRank: beltRank,
 		}
+		let userDataEP = { email: email, password: password }
 		let isValid = await ValidateUser.isValid(userData)
-		console.log(isValid)
+		if (isValid) {
+			signUpFunc(userDataEP)
+		}
 	}
 	let logIn = async (e) => {
 		let userData = {
@@ -45,7 +50,6 @@ function App() {
 			beltRank: beltRank,
 		}
 		let isValid = await ValidateUser.isValid(userData)
-		console.log(isValid)
 		if (isValid) {
 			window.alert("this will log you in one day")
 		} else {
