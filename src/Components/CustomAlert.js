@@ -3,17 +3,10 @@ import { Alert } from "@mui/material"
 import { Slide, Fade } from "@mui/material"
 
 let StyledAlert = (props) => {
-	let variableForSlideInProp = null
+	let variableForSlideInProp = props.errorVisible !== "none"
 	let errorDirection = "up"
-	if (props.errorVisible === "none") {
-		variableForSlideInProp = false
-	} else {
-		variableForSlideInProp = true
-	}
-	// the goal of this double setTimeout is to have the error message slide back down instead of disappearing
-	// but unsure why it doesn't work
-	// if i force a rerender it disappears which makes sense
-	// so i need to
+	let variableForFade = true
+	console.log({ errorDirection, variableForSlideInProp })
 
 	return (
 		<>
@@ -23,23 +16,16 @@ let StyledAlert = (props) => {
 				mountOnEnter
 				unmountOnExit
 			>
-				<Alert
-					variant="filled"
-					severity="error"
-					sx={{ display: `${props.errorVisible}` }}
-				>
-					{props.message}
-				</Alert>
+				<Fade in={variableForSlideInProp}>
+					<Alert
+						variant="filled"
+						severity="error"
+						sx={{ display: `${props.errorVisible}` }}
+					>
+						{props.message}
+					</Alert>
+				</Fade>
 			</Slide>
-			<Fade>
-				<Alert
-					variant="filled"
-					severity="error"
-					sx={{ display: `${props.errorVisible}` }}
-				>
-					{props.message}
-				</Alert>
-			</Fade>
 		</>
 	)
 }
