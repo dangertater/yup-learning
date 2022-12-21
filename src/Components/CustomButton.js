@@ -4,8 +4,6 @@ import { useTheme } from "@mui/material/styles"
 
 export default function CustomButton(props) {
 	let theme = useTheme()
-
-	console.log("button theme", theme)
 	return (
 		<Button
 			variant="contained"

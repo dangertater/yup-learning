@@ -1,21 +1,12 @@
-import { getAuth } from "firebase/auth"
 import React, { useState, useContext, useEffect } from "react"
 import app from "../firebase"
+
 let AuthContext = React.createContext()
 
 export let useAuth = () => {
 	useContext(AuthContext)
 }
-export let signUpFunc = (userData) => {
-	getAuth()
-		.createUser(userData)
-		.then((userRecord) => {
-			console.log(`created user ${userRecord.email}`)
-		})
-		.catch((error) => {
-			console.log("error", error)
-		})
-}
+
 export default function AuthProvider(props) {
 	let [theUser, setTheUser] = useState()
 
@@ -28,7 +19,7 @@ export default function AuthProvider(props) {
 		return unsubscribe
 	}, [])
 
-	let value = { theUser, signUpFunc }
+	let value = { theUser }
 	return (
 		<AuthContext.Provider value={value}>{props.children}</AuthContext.Provider>
 	)

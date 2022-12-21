@@ -6,7 +6,13 @@ import Div, { HorizontalDiv, HorizontalErrorDiv } from "./Components/Div"
 import CustomButton from "./Components/CustomButton"
 import { ValidateUser } from "./ValidateUser"
 import ErrorAlert from "./Components/CustomAlert"
-import AuthProvider, { useAuth, signUpFunc } from "./Context/AuthContext.js"
+import {
+	getAuth,
+	createUserWithEmailAndPassword,
+	initializeAuth,
+} from "firebase/auth"
+import { initializeApp } from "firebase/app"
+import { getFirestore } from "firebase/firestore"
 
 function App() {
 	// TODO one day delete the defaults below
@@ -27,6 +33,20 @@ function App() {
 			third: { main: "#FFFFFF" },
 		},
 	})
+
+	let firebaseAppInfoObj = {
+		apiKey: "AIzaSyDJk14QjE1XUKfVAkK2eJrRt9k9nN3PjQw",
+		authDomain: "coach-groupon.firebaseapp.com",
+		projectId: "coach-groupon",
+		storageBucket: "coach-groupon.appspot.com",
+		messagingSenderId: "103305585378",
+		appId: "1:103305585378:web:79d393434d5e7b58ea74bb",
+		measurementId: "G-3MQQMFRZW7",
+	}
+	const app = initializeApp(firebaseAppInfoObj)
+	let auth = getAuth(app)
+	// const db = getFirestore()
+
 	// let { signUpFunc } = useAuth()
 	// add a setTimeout to mimic server response time
 	let createUser = async (e) => {
@@ -36,10 +56,18 @@ function App() {
 			password: password,
 			beltRank: beltRank,
 		}
-		let userDataEP = { email: email, password: password }
 		let isValid = await ValidateUser.isValid(userData)
 		if (isValid) {
-			signUpFunc(userDataEP)
+			createUserWithEmailAndPassword(auth, email, password)
+				.then((userCredential) => {
+					const user = userCredential.user
+					console.log(user)
+				})
+				.catch((error) => {
+					const errorCode = error.code
+					const errorMessage = error.message
+					console.log("caught error", error)
+				})
 		}
 	}
 	let logIn = async (e) => {
