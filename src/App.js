@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useRef } from "react"
 import { createTheme, ThemeProvider } from "@mui/material/styles"
 import "./App.css"
 import Input from "./Components/Input"
@@ -12,8 +12,9 @@ function App() {
 	let [password, setPassword] = useState("heckheck")
 	let [email, setEmail] = useState("heck@gmail.com")
 	let [beltRank, setBeltRank] = useState("blue")
-	// TOD default of errorVisible should be 'none'
 	let [errorVisible, setErrorVisible] = useState("none")
+	let [userDataObj, setUserDataObj] = useState("")
+	// let userDataObj = useRef()
 	let theme = createTheme({
 		typography: {
 			body1: { color: "#FFFFFF" },
@@ -36,7 +37,9 @@ function App() {
 		}
 		let isValid = await ValidateUser.isValid(userData)
 		if (isValid) {
-			window.alert("this will sign you up one day")
+			setUserDataObj(userData)
+			setErrorVisible("userCreated")
+			console.log("app userDataObj", userDataObj)
 		} else {
 			setErrorVisible("")
 		}
@@ -53,12 +56,9 @@ function App() {
 			window.alert("this will log you in one day")
 		} else {
 			setErrorVisible("")
-			userDataBad(userData.name)
 		}
 	}
-	let userDataBad = (name) => {
-		console.log("userDataBad App.js", name)
-	}
+
 	return (
 		<ThemeProvider theme={theme}>
 			<>
@@ -89,6 +89,7 @@ function App() {
 					<CustomButton
 						function={createUser}
 						buttonText={"Sign UP"}
+						errorVisible={errorVisible}
 					></CustomButton>
 					<CustomButton function={logIn} buttonText={"Log In"}></CustomButton>
 				</HorizontalDiv>
@@ -97,6 +98,7 @@ function App() {
 						message={"The information entered is not valid, please resubmit."}
 						errorVisible={errorVisible}
 						setErrorVisible={setErrorVisible}
+						userDataObj={userDataObj}
 					></ErrorAlert>
 				</HorizontalErrorDiv>
 			</>
