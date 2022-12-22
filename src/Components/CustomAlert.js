@@ -2,7 +2,6 @@ import React from "react"
 import { Stack, Alert } from "@mui/material"
 
 let StyledAlert = (props) => {
-	console.log("styledAlert props", props)
 	return (
 		<Stack spacing={2}>
 			<Alert

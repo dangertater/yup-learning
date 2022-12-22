@@ -12,7 +12,6 @@ let StyledInput = styled("input")`
 
 export default function Input(props) {
 	let theme = useTheme()
-	console.log("input theme", theme.typography.body1.color)
 	return (
 		<StyledInput
 			placeholder={props.placeholder}

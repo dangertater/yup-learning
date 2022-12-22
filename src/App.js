@@ -73,12 +73,10 @@ function App() {
 			window.alert("this will log you in one day")
 		} else {
 			setErrorVisible("")
-			userDataBad(userData.name)
+			console.log("userDataBad App.js", userData.name)
 		}
 	}
-	let userDataBad = (name) => {
-		console.log("userDataBad App.js", name)
-	}
+
 	return (
 		<ThemeProvider theme={theme}>
 			<>
