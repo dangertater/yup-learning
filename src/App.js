@@ -6,20 +6,15 @@ import Div, { HorizontalDiv, HorizontalErrorDiv } from "./Components/Div"
 import CustomButton from "./Components/CustomButton"
 import { ValidateUser } from "./ValidateUser"
 import ErrorAlert from "./Components/CustomAlert"
-import {
-	getAuth,
-	createUserWithEmailAndPassword,
-	initializeAuth,
-} from "firebase/auth"
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth"
 import { initializeApp } from "firebase/app"
-import { getFirestore } from "firebase/firestore"
 
 function App() {
 	// TODO one day delete the defaults below
-	let [name, setName] = useState("heck")
-	let [password, setPassword] = useState("heckheck")
-	let [email, setEmail] = useState("heck@gmail.com")
-	let [beltRank, setBeltRank] = useState("blue")
+	let [name, setName] = useState("")
+	let [password, setPassword] = useState("")
+	let [email, setEmail] = useState("")
+	let [beltRank, setBeltRank] = useState("")
 	let [errorVisible, setErrorVisible] = useState("none")
 	let theme = createTheme({
 		typography: {
@@ -45,9 +40,7 @@ function App() {
 	}
 	const app = initializeApp(firebaseAppInfoObj)
 	let auth = getAuth(app)
-	// const db = getFirestore()
 
-	// let { signUpFunc } = useAuth()
 	// add a setTimeout to mimic server response time
 	let createUser = async (e) => {
 		let userData = {
@@ -64,8 +57,6 @@ function App() {
 					console.log(user)
 				})
 				.catch((error) => {
-					const errorCode = error.code
-					const errorMessage = error.message
 					console.log("caught error", error)
 				})
 		}
