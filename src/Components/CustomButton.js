@@ -4,6 +4,10 @@ import { useTheme } from "@mui/material/styles"
 
 export default function CustomButton(props) {
 	let theme = useTheme()
+	let buttonDisabled = false
+	if (props.errorVisible === "userCreated") {
+		buttonDisabled = true
+	}
 	return (
 		<Button
 			variant="contained"
@@ -11,6 +15,7 @@ export default function CustomButton(props) {
 			onClick={() => {
 				props.function()
 			}}
+			disabled={buttonDisabled}
 		>
 			{props.buttonText}
 		</Button>

@@ -1,14 +1,15 @@
-import React, { useState } from "react"
+import React, { useState, useRef } from "react"
 import { createTheme, ThemeProvider } from "@mui/material/styles"
 import "./App.css"
 import Input from "./Components/Input"
 import Div, { HorizontalDiv, HorizontalErrorDiv } from "./Components/Div"
 import CustomButton from "./Components/CustomButton"
 import { ValidateUser } from "./ValidateUser"
-import ErrorAlert from "./Components/CustomAlert"
+import { ErrorAlert } from "./Components/CustomAlert"
+// import AuthProvider from "./Context/AuthContext"
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth"
 import { initializeApp } from "firebase/app"
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 
 function App() {
 	// TODO one day delete the defaults below
@@ -17,6 +18,8 @@ function App() {
 	let [email, setEmail] = useState("")
 	let [beltRank, setBeltRank] = useState("")
 	let [errorVisible, setErrorVisible] = useState("none")
+	let [userDataObj, setUserDataObj] = useState("")
+	// let userDataObj = useRef()
 	let theme = createTheme({
 		typography: {
 			body1: { color: "#FFFFFF" },
@@ -51,7 +54,10 @@ function App() {
 			beltRank: beltRank,
 		}
 		let isValid = await ValidateUser.isValid(userData)
+		//-------
 		if (isValid) {
+			setUserDataObj(userData)
+			setErrorVisible("userCreated")
 			createUserWithEmailAndPassword(auth, email, password)
 				.then((userCredential) => {
 					const user = userCredential.user
@@ -60,6 +66,9 @@ function App() {
 				.catch((error) => {
 					console.log("caught error", error)
 				})
+		} else {
+			//TODO: change set error visible to set alert visable or dont forget.
+			setErrorVisible("")
 		}
 	}
 	let logIn = async (e) => {
@@ -74,15 +83,19 @@ function App() {
 			window.alert("this will log you in one day")
 		} else {
 			setErrorVisible("")
-			console.log("userDataBad App.js", userData.name)
 		}
 	}
 
 	return (
 		<ThemeProvider theme={theme}>
 			<>
+				<Router>
+					{/* <AuthProvider> */}
+					{/* <Switch></Switch> */}
+					{/* </AuthProvider> */}
+				</Router>
 				<Div>
-					<h1>heck</h1>
+					<h1>heck asdf</h1>
 					<Input
 						placeholder={"name"}
 						userInfo={name}
@@ -108,6 +121,7 @@ function App() {
 					<CustomButton
 						function={createUser}
 						buttonText={"Sign UP"}
+						errorVisible={errorVisible}
 					></CustomButton>
 					<CustomButton function={logIn} buttonText={"Log In"}></CustomButton>
 				</HorizontalDiv>
@@ -115,6 +129,8 @@ function App() {
 					<ErrorAlert
 						message={"The information entered is not valid, please resubmit."}
 						errorVisible={errorVisible}
+						setErrorVisible={setErrorVisible}
+						userDataObj={userDataObj}
 					></ErrorAlert>
 				</HorizontalErrorDiv>
 			</>
