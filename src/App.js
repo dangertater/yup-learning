@@ -6,12 +6,15 @@ import Div, { HorizontalDiv, HorizontalErrorDiv } from "./Components/Div"
 import CustomButton from "./Components/CustomButton"
 import { ValidateUser } from "./ValidateUser"
 import ErrorAlert from "./Components/CustomAlert"
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth"
+import { initializeApp } from "firebase/app"
+
 function App() {
 	// TODO one day delete the defaults below
-	let [name, setName] = useState("heck")
-	let [password, setPassword] = useState("heckheck")
-	let [email, setEmail] = useState("heck@gmail.com")
-	let [beltRank, setBeltRank] = useState("blue")
+	let [name, setName] = useState("")
+	let [password, setPassword] = useState("")
+	let [email, setEmail] = useState("")
+	let [beltRank, setBeltRank] = useState("")
 	let [errorVisible, setErrorVisible] = useState("none")
 	let theme = createTheme({
 		typography: {
@@ -25,6 +28,19 @@ function App() {
 			third: { main: "#FFFFFF" },
 		},
 	})
+
+	let firebaseAppInfoObj = {
+		apiKey: "AIzaSyDJk14QjE1XUKfVAkK2eJrRt9k9nN3PjQw",
+		authDomain: "coach-groupon.firebaseapp.com",
+		projectId: "coach-groupon",
+		storageBucket: "coach-groupon.appspot.com",
+		messagingSenderId: "103305585378",
+		appId: "1:103305585378:web:79d393434d5e7b58ea74bb",
+		measurementId: "G-3MQQMFRZW7",
+	}
+	const app = initializeApp(firebaseAppInfoObj)
+	let auth = getAuth(app)
+
 	// add a setTimeout to mimic server response time
 	let createUser = async (e) => {
 		let userData = {
@@ -34,7 +50,16 @@ function App() {
 			beltRank: beltRank,
 		}
 		let isValid = await ValidateUser.isValid(userData)
-		console.log(isValid)
+		if (isValid) {
+			createUserWithEmailAndPassword(auth, email, password)
+				.then((userCredential) => {
+					const user = userCredential.user
+					console.log(user)
+				})
+				.catch((error) => {
+					console.log("caught error", error)
+				})
+		}
 	}
 	let logIn = async (e) => {
 		let userData = {
@@ -44,17 +69,14 @@ function App() {
 			beltRank: beltRank,
 		}
 		let isValid = await ValidateUser.isValid(userData)
-		console.log(isValid)
 		if (isValid) {
 			window.alert("this will log you in one day")
 		} else {
 			setErrorVisible("")
-			userDataBad(userData.name)
+			console.log("userDataBad App.js", userData.name)
 		}
 	}
-	let userDataBad = (name) => {
-		console.log("userDataBad App.js", name)
-	}
+
 	return (
 		<ThemeProvider theme={theme}>
 			<>
