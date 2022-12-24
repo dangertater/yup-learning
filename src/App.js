@@ -7,7 +7,7 @@ import CustomButton from "./Components/CustomButton"
 import { ValidateUser } from "./ValidateUser"
 import { ErrorAlert } from "./Components/CustomAlert"
 // import AuthProvider from "./Context/AuthContext"
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
+import { BrowserRouter as Router, Route } from "react-router-dom"
 function App() {
 	// TODO one day delete the defaults below
 	let [name, setName] = useState("heck")
