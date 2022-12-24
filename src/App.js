@@ -8,6 +8,7 @@ import { ValidateUser } from "./ValidateUser"
 import ErrorAlert from "./Components/CustomAlert"
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth"
 import { initializeApp } from "firebase/app"
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 
 function App() {
 	// TODO one day delete the defaults below
