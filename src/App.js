@@ -7,9 +7,17 @@ import CustomButton from "./Components/CustomButton"
 import { ValidateUser } from "./ValidateUser"
 import { ErrorAlert } from "./Components/CustomAlert"
 // import AuthProvider from "./Context/AuthContext"
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
+import {
+	BrowserRouter as Router,
+	Routes,
+	Route,
+	NavLink,
+} from "react-router-dom"
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth"
 import { initializeApp } from "firebase/app"
+import TestPage from "./TestPage"
+import TestPage2 from "./TestPage2"
+import TestPage3 from "./TestPage3"
 
 function App() {
 	// TODO one day delete the defaults below
