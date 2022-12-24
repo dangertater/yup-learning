@@ -7,13 +7,16 @@ import CustomButton from "./Components/CustomButton"
 import { ValidateUser } from "./ValidateUser"
 import { ErrorAlert } from "./Components/CustomAlert"
 // import AuthProvider from "./Context/AuthContext"
-import { BrowserRouter as Router, Route } from "react-router-dom"
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth"
+import { initializeApp } from "firebase/app"
+
 function App() {
 	// TODO one day delete the defaults below
-	let [name, setName] = useState("heck")
-	let [password, setPassword] = useState("heckheck")
-	let [email, setEmail] = useState("heck@gmail.com")
-	let [beltRank, setBeltRank] = useState("blue")
+	let [name, setName] = useState("")
+	let [password, setPassword] = useState("")
+	let [email, setEmail] = useState("")
+	let [beltRank, setBeltRank] = useState("")
 	let [errorVisible, setErrorVisible] = useState("none")
 	let [userDataObj, setUserDataObj] = useState("")
 	// let userDataObj = useRef()
@@ -29,6 +32,19 @@ function App() {
 			third: { main: "#FFFFFF" },
 		},
 	})
+
+	let firebaseAppInfoObj = {
+		apiKey: "AIzaSyDJk14QjE1XUKfVAkK2eJrRt9k9nN3PjQw",
+		authDomain: "coach-groupon.firebaseapp.com",
+		projectId: "coach-groupon",
+		storageBucket: "coach-groupon.appspot.com",
+		messagingSenderId: "103305585378",
+		appId: "1:103305585378:web:79d393434d5e7b58ea74bb",
+		measurementId: "G-3MQQMFRZW7",
+	}
+	const app = initializeApp(firebaseAppInfoObj)
+	let auth = getAuth(app)
+
 	// add a setTimeout to mimic server response time
 	let createUser = async (e) => {
 		let userData = {
@@ -38,11 +54,20 @@ function App() {
 			beltRank: beltRank,
 		}
 		let isValid = await ValidateUser.isValid(userData)
+		//-------
 		if (isValid) {
 			setUserDataObj(userData)
 			setErrorVisible("userCreated")
-			console.log("app userDataObj", userDataObj)
+			createUserWithEmailAndPassword(auth, email, password)
+				.then((userCredential) => {
+					const user = userCredential.user
+					console.log(user)
+				})
+				.catch((error) => {
+					console.log("caught error", error)
+				})
 		} else {
+			//TODO: change set error visible to set alert visable or dont forget.
 			setErrorVisible("")
 		}
 	}
@@ -66,7 +91,7 @@ function App() {
 			<>
 				<Router>
 					{/* <AuthProvider> */}
-					<Switch></Switch>
+					{/* <Switch></Switch> */}
 					{/* </AuthProvider> */}
 				</Router>
 				<Div>
