@@ -15,9 +15,8 @@ import {
 } from "react-router-dom"
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth"
 import { initializeApp } from "firebase/app"
-import TestPage from "./TestPage"
-import TestPage2 from "./TestPage2"
-import TestPage3 from "./TestPage3"
+import { NavBar } from "./Components/Div"
+import MenuButton from "./Components/MenuButton"
 
 function App() {
 	// TODO one day delete the defaults below
@@ -97,11 +96,9 @@ function App() {
 	return (
 		<ThemeProvider theme={theme}>
 			<>
-				<Router>
-					{/* <AuthProvider> */}
-					{/* <Switch></Switch> */}
-					{/* </AuthProvider> */}
-				</Router>
+				<NavBar>
+					<MenuButton></MenuButton>
+				</NavBar>
 				<Div>
 					<h1>heck asdf</h1>
 					<Input

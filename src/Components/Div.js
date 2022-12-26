@@ -18,7 +18,11 @@ let HorizontalErrorStyledDiv = styled("div")`
 	justify-content: center;
 	margin-top: 4px;
 `
-
+let StyledNavBar = styled("div")`
+	background-color: red;
+	width: 100%;
+	height: 10vh;
+`
 export default function Div({ children }) {
 	return <StyledDiv>{children}</StyledDiv>
 }
@@ -29,4 +33,8 @@ export function HorizontalDiv({ children }) {
 
 export function HorizontalErrorDiv({ children }) {
 	return <HorizontalErrorStyledDiv>{children}</HorizontalErrorStyledDiv>
+}
+
+export function NavBar({ children }) {
+	return <StyledNavBar>{children}</StyledNavBar>
 }
