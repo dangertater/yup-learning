@@ -28,6 +28,9 @@ function App() {
 	let [userDataObj, setUserDataObj] = useState("")
 	let [menuVisible, setMenuVisible] = useState(false)
 	// let userDataObj = useRef()
+	let handleMenuClick = () => {
+		setMenuVisible(!menuVisible)
+	}
 	let theme = createTheme({
 		typography: {
 			body1: { color: "#FFFFFF" },
@@ -98,10 +101,7 @@ function App() {
 		<ThemeProvider theme={theme}>
 			<>
 				<NavBar>
-					<MenuButton
-						setMenuVisible={setMenuVisible}
-						menuVisible={menuVisible}
-					></MenuButton>
+					<MenuButton handleMenuClick={handleMenuClick}></MenuButton>
 					<Menu
 						menuVisible={menuVisible}
 						setMenuVisible={setMenuVisible}
