@@ -98,7 +98,10 @@ function App() {
 		<ThemeProvider theme={theme}>
 			<>
 				<NavBar>
-					<MenuButton></MenuButton>
+					<MenuButton
+						setMenuVisible={setMenuVisible}
+						menuVisible={menuVisible}
+					></MenuButton>
 					<Menu
 						menuVisible={menuVisible}
 						setMenuVisible={setMenuVisible}
