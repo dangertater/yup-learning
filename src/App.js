@@ -13,7 +13,7 @@ import { initializeApp } from "firebase/app"
 import { NavBar } from "./Components/Div"
 import MenuButton, { Menu } from "./Components/MenuButton"
 import About from "./Components/About"
-
+const paths = { about: "/About" }
 function App() {
 	// TODO one day delete the defaults below
 	let [name, setName] = useState("")
@@ -144,16 +144,13 @@ function App() {
 						<Link to="/">/</Link>
 					</li>
 					<li>
-						<Link to="./Components/About.js">./Components/About.js</Link>
-					</li>
-					<li>
-						<Link to="About.js">About.js</Link>
+						<Link to={paths.about}>./Components/About.js</Link>
 					</li>
 				</ul>
 				<Routes>
-					<Route path="/" element={<App />}></Route>
+					<Route path="/" element={<h1>asdf</h1>}></Route>
 					{/* Above is recognized as a path, i think its mad that its a link to App.js from App.js */}
-					<Route path="About" element={<About />}></Route>
+					<Route path={paths.about} element={<About />}></Route>
 					{/* Above route is not  */}
 					{/* <Route></Route> */}
 					{/* <Route></Route> */}
