@@ -16,7 +16,7 @@ import {
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth"
 import { initializeApp } from "firebase/app"
 import { NavBar } from "./Components/Div"
-import MenuButton from "./Components/MenuButton"
+import MenuButton, { Menu } from "./Components/MenuButton"
 
 function App() {
 	// TODO one day delete the defaults below
@@ -26,6 +26,7 @@ function App() {
 	let [beltRank, setBeltRank] = useState("")
 	let [errorVisible, setErrorVisible] = useState("none")
 	let [userDataObj, setUserDataObj] = useState("")
+	let [menuVisible, setMenuVisible] = useState(false)
 	// let userDataObj = useRef()
 	let theme = createTheme({
 		typography: {
@@ -98,6 +99,10 @@ function App() {
 			<>
 				<NavBar>
 					<MenuButton></MenuButton>
+					<Menu
+						menuVisible={menuVisible}
+						setMenuVisible={setMenuVisible}
+					></Menu>
 				</NavBar>
 				<Div>
 					<h1>heck asdf</h1>
