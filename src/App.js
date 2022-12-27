@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react"
+import React, { useState } from "react"
 import { createTheme, ThemeProvider } from "@mui/material/styles"
 import "./App.css"
 import Input from "./Components/Input"
@@ -7,17 +7,13 @@ import CustomButton from "./Components/CustomButton"
 import { ValidateUser } from "./ValidateUser"
 import { ErrorAlert } from "./Components/CustomAlert"
 // import AuthProvider from "./Context/AuthContext"
-import {
-	BrowserRouter as Router,
-	Routes,
-	Route,
-	NavLink,
-} from "react-router-dom"
+import { Routes, Route, Link } from "react-router-dom"
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth"
 import { initializeApp } from "firebase/app"
 import { NavBar } from "./Components/Div"
 import MenuButton, { Menu } from "./Components/MenuButton"
-
+import About from "./Components/About"
+const paths = { about: "/About" }
 function App() {
 	// TODO one day delete the defaults below
 	let [name, setName] = useState("")
@@ -78,7 +74,7 @@ function App() {
 					console.log("caught error", error)
 				})
 		} else {
-			//TODO: change set error visible to set alert visable or dont forget.
+			//TODO: change set error visible to set alert visible or don't forget.
 			setErrorVisible("")
 		}
 	}
@@ -108,7 +104,7 @@ function App() {
 					></Menu>
 				</NavBar>
 				<Div>
-					<h1>heck asdf</h1>
+					<h1>heck</h1>
 					<Input
 						placeholder={"name"}
 						userInfo={name}
@@ -146,6 +142,22 @@ function App() {
 						userDataObj={userDataObj}
 					></ErrorAlert>
 				</HorizontalErrorDiv>
+				<ul>
+					<li>
+						<Link to="/">/</Link>
+					</li>
+					<li>
+						<Link to={paths.about}>./Components/About.js</Link>
+					</li>
+				</ul>
+				<Routes>
+					<Route path="/" element={<h1>asdf</h1>}></Route>
+					{/* Above is recognized as a path, i think its mad that its a link to App.js from App.js */}
+					<Route path={paths.about} element={<About />}></Route>
+					{/* Above route is not  */}
+					{/* <Route></Route> */}
+					{/* <Route></Route> */}
+				</Routes>
 			</>
 		</ThemeProvider>
 	)
