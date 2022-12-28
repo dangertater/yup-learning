@@ -8,13 +8,18 @@ import { ValidateUser } from "./ValidateUser"
 import { ErrorAlert } from "./Components/CustomAlert"
 // import AuthProvider from "./Context/AuthContext"
 import { Routes, Route, Link } from "react-router-dom"
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth"
+import {
+	getAuth,
+	createUserWithEmailAndPassword,
+	signInWithEmailAndPassword,
+} from "firebase/auth"
 import { initializeApp } from "firebase/app"
 import { NavBar } from "./Components/Div"
 import MenuButton, { Menu } from "./Components/MenuButton"
 import About from "./Components/About"
 import ElMission from "./Components/ElMission"
 import LogInPage from "./Components/LogInPage"
+
 const paths = {
 	about: "/About",
 	mission: "/ElMission",
@@ -85,6 +90,18 @@ function App() {
 		}
 	}
 	let logUserIn = (email, password) => {}
+	signInWithEmailAndPassword(auth, email, password)
+		.then((userCredential) => {
+			// Signed in
+			//prettier-ignore
+			// (<Link to={paths.loginPage}></Link>).click()
+			const user = userCredential.user
+			// ...
+		})
+		.catch((error) => {
+			const errorCode = error.code
+			const errorMessage = error.message
+		})
 	let logIn = async (e) => {
 		let userData = {
 			name: name,
