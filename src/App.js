@@ -13,7 +13,13 @@ import { initializeApp } from "firebase/app"
 import { NavBar } from "./Components/Div"
 import MenuButton, { Menu } from "./Components/MenuButton"
 import About from "./Components/About"
-const paths = { about: "/About" }
+import ElMission from "./Components/ElMission"
+import LogInPage from "./Components/LogInPage"
+const paths = {
+	about: "/About",
+	mission: "/ElMission",
+	loginPage: "/LogInPage",
+}
 function App() {
 	// TODO one day delete the defaults below
 	let [name, setName] = useState("")
@@ -52,7 +58,7 @@ function App() {
 	const app = initializeApp(firebaseAppInfoObj)
 	let auth = getAuth(app)
 
-	// add a setTimeout to mimic server response time
+	// TODO: add a setTimeout to mimic server response time
 	let createUser = async (e) => {
 		let userData = {
 			name: name,
@@ -78,6 +84,7 @@ function App() {
 			setErrorVisible("")
 		}
 	}
+	let logUserIn = (email, password) => {}
 	let logIn = async (e) => {
 		let userData = {
 			name: name,
@@ -87,7 +94,8 @@ function App() {
 		}
 		let isValid = await ValidateUser.isValid(userData)
 		if (isValid) {
-			window.alert("this will log you in one day")
+			// window.alert("this will log you in one day")
+			logUserIn(userData.email, userData.password)
 		} else {
 			setErrorVisible("")
 		}
@@ -142,21 +150,13 @@ function App() {
 						userDataObj={userDataObj}
 					></ErrorAlert>
 				</HorizontalErrorDiv>
-				<ul>
-					<li>
-						<Link to="/">/</Link>
-					</li>
-					<li>
-						<Link to={paths.about}>./Components/About.js</Link>
-					</li>
-				</ul>
 				<Routes>
-					<Route path="/" element={<h1>asdf</h1>}></Route>
-					{/* Above is recognized as a path, i think its mad that its a link to App.js from App.js */}
+					{/* below links in MenuButton.js */}
+					<Route path="/" element={<p>this is the home page</p>}></Route>
 					<Route path={paths.about} element={<About />}></Route>
-					{/* Above route is not  */}
-					{/* <Route></Route> */}
-					{/* <Route></Route> */}
+					<Route path={paths.mission} element={<ElMission />}></Route>
+					{/* Link is probably going in logInUser() on App.js */}
+					<Route path={paths.loginPage} element={<LogInPage />}></Route>
 				</Routes>
 			</>
 		</ThemeProvider>
