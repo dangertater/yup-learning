@@ -2,7 +2,11 @@ import React from "react"
 import WavesIcon from "@mui/icons-material/Waves"
 import { styled } from "@mui/material/styles"
 import { Link } from "react-router-dom"
-const paths = { about: "/About", mission: "/ElMission" }
+const paths = {
+	about: "/About",
+	mission: "/ElMission",
+	loginPage: "/LogInPage",
+}
 
 let MenuDiv = styled("div")`
 	display: inline-flex;
@@ -28,6 +32,9 @@ export function Menu(props) {
 
 				<li>
 					<Link to={paths.mission}>to the mission!</Link>
+				</li>
+				<li>
+					<Link to={paths.loginPage}>login page, temporary</Link>
 				</li>
 			</ul>
 		</MenuDiv>

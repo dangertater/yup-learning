@@ -10,6 +10,7 @@ import { ErrorAlert } from "./Components/CustomAlert"
 import { Routes, Route, Link } from "react-router-dom"
 import {
 	getAuth,
+	// onAuthStateChanged,
 	createUserWithEmailAndPassword,
 	signInWithEmailAndPassword,
 } from "firebase/auth"
@@ -89,19 +90,7 @@ function App() {
 			setErrorVisible("")
 		}
 	}
-	let logUserIn = (email, password) => {}
-	signInWithEmailAndPassword(auth, email, password)
-		.then((userCredential) => {
-			// Signed in
-			//prettier-ignore
-			// (<Link to={paths.loginPage}></Link>).click()
-			const user = userCredential.user
-			// ...
-		})
-		.catch((error) => {
-			const errorCode = error.code
-			const errorMessage = error.message
-		})
+
 	let logIn = async (e) => {
 		let userData = {
 			name: name,
@@ -111,8 +100,23 @@ function App() {
 		}
 		let isValid = await ValidateUser.isValid(userData)
 		if (isValid) {
-			// window.alert("this will log you in one day")
-			logUserIn(userData.email, userData.password)
+			console.log("pre sign in func")
+			signInWithEmailAndPassword(userData.email, userData.password)
+				.then((userCredential) => {
+					let user = userCredential.user
+
+					// https://firebase.google.com/docs/auth/web/manage-users documentation on authenticating users
+				})
+				.catch((error) => {
+					const errorCode = error.code
+					const errorMessage = error.message
+					console.log(
+						"signInWEmailAndPass, error code",
+						errorCode,
+						"errorMessage",
+						errorMessage
+					)
+				})
 		} else {
 			setErrorVisible("")
 		}
@@ -172,7 +176,6 @@ function App() {
 					<Route path="/" element={<p>this is the home page</p>}></Route>
 					<Route path={paths.about} element={<About />}></Route>
 					<Route path={paths.mission} element={<ElMission />}></Route>
-					{/* Link is probably going in logInUser() on App.js */}
 					<Route path={paths.loginPage} element={<LogInPage />}></Route>
 				</Routes>
 			</>
@@ -181,3 +184,4 @@ function App() {
 }
 
 export default App
+// ;(<Link to={paths.loginPage}></Link>).click()
