@@ -62,7 +62,6 @@ function App() {
 		measurementId: "G-3MQQMFRZW7",
 	}
 	const app = initializeApp(firebaseAppInfoObj)
-	let auth = getAuth(app)
 
 	// TODO: add a setTimeout to mimic server response time
 	let createUser = async (e) => {
@@ -101,7 +100,8 @@ function App() {
 		let isValid = await ValidateUser.isValid(userData)
 		if (isValid) {
 			console.log("pre sign in func")
-			signInWithEmailAndPassword(userData.email, userData.password)
+			let auth = getAuth(app)
+			signInWithEmailAndPassword(auth,userData.email, userData.password)
 				.then((userCredential) => {
 					let user = userCredential.user
 

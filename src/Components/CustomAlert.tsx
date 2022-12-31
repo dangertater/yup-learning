@@ -4,7 +4,7 @@ import { Slide } from "@mui/material"
 
 let StyledAlert = (props) => {
 	let variableForSlideInProp = props.errorVisible !== "none"
-	let errorDirection = "up"
+	let errorDirection: 'up'|'down'|'left'|'right' = "up"
 	//TODO: the if statement rendering different objects is garbage
 	// ----make one item render on alerts, and have it render the appropriate alert
 	if (props.errorVisible === "userCreated") {

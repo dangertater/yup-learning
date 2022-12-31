@@ -14,7 +14,7 @@ let MenuDiv = styled("div")`
 	background-color: yellow;
 	min-height: 20px;
 	min-width: 20px;
-	visibility: ${(props) => (props.menuVisible ? "visible" : "hidden")};
+	visibility: ${(props:{menuVisible:boolean}) => (props.menuVisible ? "visible" : "hidden")};
 	padding-right: 10px;
 `
 
