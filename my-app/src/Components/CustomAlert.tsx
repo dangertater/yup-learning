@@ -1,10 +1,21 @@
 import React from "react"
 import { Alert } from "@mui/material"
 import { Slide } from "@mui/material"
+import { TypeOf } from "yup"
 
-let StyledAlert = (props) => {
+// interface StyledAlertProps {errorVisible: string, userDataObj:object}
+//q4e: the below 'any' effects the .email oon line 31 but 'string' does not.
+//----this is odd as .email is a string, so does the 'any' property get passed to all children of the object while others
+//----like 'string' do not?
+// interface StyledAlertProps {[key:string]: any}
+// let StyledAlert: React.FC<StyledAlertProps> = (props) => {
+type ObjectType = {email:string}
+type StyledAlertProps = {errorVisible:string,message:string, userDataObj:ObjectType}
+	//how do i set the type of the nested child, following syntax from chatgpt 'set nested child type'
+let StyledAlert = (props:StyledAlertProps) =>{
 	let variableForSlideInProp = props.errorVisible !== "none"
 	let errorDirection: 'up'|'down'|'left'|'right' = "up"
+	
 	//TODO: the if statement rendering different objects is garbage
 	// ----make one item render on alerts, and have it render the appropriate alert
 	if (props.errorVisible === "userCreated") {
@@ -49,7 +60,10 @@ let StyledAlert = (props) => {
 		)
 	}
 }
-export function ErrorAlert(props) {
+
+//q4e: why is 
+type ErrorAlertProps = {message:string,errorVisible:string,setErrorVisible:string,userDataObj:object}
+export function ErrorAlert(props:ErrorAlertProps) {
 	return (
 		<StyledAlert
 			message={props.message}

@@ -17,6 +17,7 @@ import MenuButton, { Menu } from "./Components/MenuButton"
 import About from "./Components/About"
 import ElMission from "./Components/ElMission"
 import LogInPage from "./Components/LogInPage"
+export declare interface AppProps {children?: React.ReactNode;}
 
 const paths = {
 	about: "/About",
@@ -101,7 +102,7 @@ function App() {
 			signInWithEmailAndPassword(auth,userData.email, userData.password)
 				.then((userCredential) => {
 					let user = userCredential.user
-          console.log('login function user',user)
+        console.log('login function user',user)
 					// https://firebase.google.com/docs/auth/web/manage-users documentation on authenticating users
 				})
 				.catch((error) => {
