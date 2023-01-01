@@ -61,7 +61,7 @@ let StyledAlert = (props:StyledAlertProps) =>{
 	}
 }
 
-//q4e: press alt shift z to move forward, and the red squigly moves which i do not understand :(
+//q4e: press alt shift z to move forward, and the red squigly moves which i do not understand :(	
 type EmailTypeHeck = {}
 type ErrorAlertProps = {message:string,errorVisible:string,setErrorVisible:string,userDataObj:EmailTypeHeck}
 export function ErrorAlert(props:ErrorAlertProps) {
