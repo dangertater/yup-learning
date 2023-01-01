@@ -8,9 +8,7 @@ import { ValidateUser } from "./ValidateUser"
 import { ErrorAlert } from "./Components/CustomAlert"
 import { Routes, Route } from "react-router-dom"
 import {
-	getAuth,
-	// onAuthStateChanged,
-	createUserWithEmailAndPassword,
+	getAuth,	createUserWithEmailAndPassword,
 	signInWithEmailAndPassword,
 } from "firebase/auth"
 import { initializeApp } from "firebase/app"
@@ -39,15 +37,13 @@ function App() {
 		setMenuVisible(!menuVisible)
 	}
 	let theme = createTheme({
-		typography: {
+		typography:  {
 			body1: { color: "#FFFFFF" },
 			body2: { color: "yellow" },
-			body3: { color: "green" },
 		},
 		palette: {
 			primary: { main: "#e91e63" },
 			secondary: { main: "#00a152" },
-			third: { main: "#FFFFFF" },
 		},
 	})
 
@@ -63,8 +59,9 @@ function App() {
 	const app = initializeApp(firebaseAppInfoObj)
 
 	// TODO: add a setTimeout to mimic server response time
-	let createUser = async (e) => {
-		let userData = {
+	let createUser = async (e:any) => {
+    let auth = getAuth(app)
+		let userData:any = {
 			name: name,
 			email: email,
 			password: password,
@@ -75,7 +72,8 @@ function App() {
 		if (isValid) {
 			setUserDataObj(userData)
 			setErrorVisible("userCreated")
-			createUserWithEmailAndPassword(auth, email, password)
+      //
+			createUserWithEmailAndPassword( auth, email, password)
 				.then((userCredential) => {
 					const user = userCredential.user
 					console.log(user)
@@ -89,7 +87,7 @@ function App() {
 		}
 	}
 
-	let logIn = async (e) => {
+	let logIn = async (e:{}) => {
 		let userData = {
 			name: name,
 			email: email,
@@ -103,7 +101,7 @@ function App() {
 			signInWithEmailAndPassword(auth,userData.email, userData.password)
 				.then((userCredential) => {
 					let user = userCredential.user
-
+          console.log('login function user',user)
 					// https://firebase.google.com/docs/auth/web/manage-users documentation on authenticating users
 				})
 				.catch((error) => {
