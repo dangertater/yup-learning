@@ -1,7 +1,6 @@
 import React from "react"
 import { Alert } from "@mui/material"
 import { Slide } from "@mui/material"
-import { TypeOf } from "yup"
 
 // interface StyledAlertProps {errorVisible: string, userDataObj:object}
 //q4e: the below 'any' effects the .email oon line 31 but 'string' does not.
@@ -9,13 +8,17 @@ import { TypeOf } from "yup"
 //----like 'string' do not?
 // interface StyledAlertProps {[key:string]: any}
 // let StyledAlert: React.FC<StyledAlertProps> = (props) => {
-type ObjectType = {email:string}
-type StyledAlertProps = {errorVisible:string,message:string, userDataObj:ObjectType}
-	//how do i set the type of the nested child, following syntax from chatgpt 'set nested child type'
-let StyledAlert = (props:StyledAlertProps) =>{
+type StyledAlertProps = {
+	message: string,
+	errorVisible: string,
+	setErrorVisible: any
+	userDataObj: {email:any,password:any}
+}
+//how do i set the type of the nested child, following syntax from chatgpt 'set nested child type'
+let StyledAlert = (props: StyledAlertProps) => {
 	let variableForSlideInProp = props.errorVisible !== "none"
-	let errorDirection: 'up'|'down'|'left'|'right' = "up"
-	
+	let errorDirection: "up" | "down" | "left" | "right" = "up"
+
 	//TODO: the if statement rendering different objects is garbage
 	// ----make one item render on alerts, and have it render the appropriate alert
 	if (props.errorVisible === "userCreated") {
@@ -61,9 +64,14 @@ let StyledAlert = (props:StyledAlertProps) =>{
 	}
 }
 
-//q4e: why is 
-type ErrorAlertProps = {message:string,errorVisible:string,setErrorVisible:string,userDataObj:object}
-export function ErrorAlert(props:ErrorAlertProps) {
+type ErrorAlertProps = {
+	message: string,
+	errorVisible: string,
+	setErrorVisible: any,
+	//app.tsx is mad about the things in the object
+	userDataObj: {email:any,password:any};
+}
+export function ErrorAlert(props: ErrorAlertProps) {
 	return (
 		<StyledAlert
 			message={props.message}

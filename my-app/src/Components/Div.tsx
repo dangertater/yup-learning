@@ -24,6 +24,8 @@ let StyledNavBar = styled("div")`
 	height: 10vh;
 `
 
+
+//q4e:i could convert these to props and typescript them with confidence, but nah :(
 export default function Div({ children }) {
 	return <StyledDiv>{children}</StyledDiv>
 }

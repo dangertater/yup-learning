@@ -9,8 +9,9 @@ let StyledInput = styled("input")`
 		color: white;
 	}
 `
+type StyledInputProps ={placeholder:string, setUserInfo:number}
 
-export default function Input(props) {
+export default function Input(props:StyledInputProps) {
 	let theme = useTheme()
 	return (
 		<StyledInput

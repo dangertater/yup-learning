@@ -24,7 +24,9 @@ const paths = {
 	mission: "/ElMission",
 	loginPage: "/LogInPage",
 }
-function App() {
+
+//q4e: i changed 'function' before App below to 'const' to get the React.FC to work...should i not have?
+const App:React.FC = (props) =>{
 	// TODO one day delete the defaults below
 	let [name, setName] = useState("")
 	let [password, setPassword] = useState("")
@@ -87,7 +89,6 @@ function App() {
 			setErrorVisible("")
 		}
 	}
-
 	let logIn = async (e:{}) => {
 		let userData = {
 			name: name,
@@ -119,6 +120,8 @@ function App() {
 			setErrorVisible("")
 		}
 	}
+
+	interface ErrorAlert {message:string,errorVisible:string,setErrorVisible:string,userDataObj:{}}
 
 	return (
 		<ThemeProvider theme={theme}>
