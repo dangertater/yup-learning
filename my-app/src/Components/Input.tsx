@@ -9,7 +9,7 @@ let StyledInput = styled("input")`
 		color: white;
 	}
 `
-type StyledInputProps ={placeholder:string, setUserInfo:number}
+type StyledInputProps ={placeholder:string, userInfo:string,setUserInfo:Function}
 
 export default function Input(props:StyledInputProps) {
 	let theme = useTheme()
