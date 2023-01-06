@@ -17,6 +17,7 @@ import MenuButton, { Menu } from "./Components/MenuButton"
 import About from "./Components/About"
 import ElMission from "./Components/ElMission"
 import LogInPage from "./Components/LogInPage"
+import { UserData } from "./types/user"
 export declare interface AppProps {children?: React.ReactNode;}
 
 const paths = {
@@ -33,8 +34,12 @@ const App:React.FC = (props) =>{
 	let [email, setEmail] = useState("")
 	let [beltRank, setBeltRank] = useState("")
 	let [errorVisible, setErrorVisible] = useState("none")
-	let [userDataObj, setUserDataObj] = useState("")
+	let [userDataObj, setUserDataObj] = useState<UserData|undefined>()
 	let [menuVisible, setMenuVisible] = useState(false)
+	//eric's example below
+	// let tempThing : () => string = (heck?:string)=>{return '' } 
+	// tempThing = ()=>{return {}}
+	//eric's example above
 	// let userDataObj = useRef()
 	let handleMenuClick = () => {
 		setMenuVisible(!menuVisible)
@@ -62,9 +67,9 @@ const App:React.FC = (props) =>{
 	const app = initializeApp(firebaseAppInfoObj)
 
 	// TODO: add a setTimeout to mimic server response time
-	let createUser = async (e:any) => {
+	let createUser = async (e:unknown) => {
     let auth = getAuth(app)
-		let userData:any = {
+		let userData = {
 			name: name,
 			email: email,
 			password: password,
@@ -74,6 +79,7 @@ const App:React.FC = (props) =>{
 		//-------
 		if (isValid) {
 			setUserDataObj(userData)
+			console.log(userDataObj)
 			setErrorVisible("userCreated")
       //
 			createUserWithEmailAndPassword( auth, email, password)
@@ -121,7 +127,7 @@ const App:React.FC = (props) =>{
 		}
 	}
 
-	interface ErrorAlert {message:string,errorVisible:string,setErrorVisible:string,userDataObj:{}}
+	// interface ErrorAlert {message:string,errorVisible:string,setErrorVisible:string,userDataObj:{}}
 
 	return (
 		<ThemeProvider theme={theme}>
@@ -158,18 +164,17 @@ const App:React.FC = (props) =>{
 				</Div>
 				<HorizontalDiv>
 					<CustomButton
-						function={createUser}
+						onClick={createUser}
 						buttonText={"Sign UP"}
 						errorVisible={errorVisible}
 					></CustomButton>
-					<CustomButton function={logIn} buttonText={"Log In"}></CustomButton>
+					<CustomButton errorVisible={errorVisible} onClick={logIn} buttonText={"Log In"}></CustomButton>
 				</HorizontalDiv>
 				<HorizontalErrorDiv>
 					<ErrorAlert
 						message={"The information entered is not valid, please resubmit."}
 						errorVisible={errorVisible}
 						setErrorVisible={setErrorVisible}
-						userDataObj={userDataObj}
 					></ErrorAlert>
 				</HorizontalErrorDiv>
 				<Routes>
@@ -185,4 +190,3 @@ const App:React.FC = (props) =>{
 }
 
 export default App
-// ;(<Link to={paths.loginPage}></Link>).click()

@@ -12,7 +12,6 @@ type StyledAlertProps = {
 	message: string,
 	errorVisible: string,
 	setErrorVisible: any
-	userDataObj: {email:any,password:any}
 }
 //how do i set the type of the nested child, following syntax from chatgpt 'set nested child type'
 let StyledAlert = (props: StyledAlertProps) => {
@@ -69,7 +68,6 @@ type ErrorAlertProps = {
 	errorVisible: string,
 	setErrorVisible: any,
 	//app.tsx is mad about the things in the object
-	userDataObj: {email:any,password:any};
 }
 export function ErrorAlert(props: ErrorAlertProps) {
 	return (
@@ -77,7 +75,6 @@ export function ErrorAlert(props: ErrorAlertProps) {
 			message={props.message}
 			errorVisible={props.errorVisible}
 			setErrorVisible={props.setErrorVisible}
-			userDataObj={props.userDataObj}
 		></StyledAlert>
 	)
 }
