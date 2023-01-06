@@ -23,21 +23,21 @@ let StyledNavBar = styled("div")`
 	width: 100%;
 	height: 10vh;
 `
-
+type Props ={ children?:React.ReactNode}
 
 //q4e:i could convert these to props and typescript them with confidence, but nah :(
-export default function Div({ children }) {
+export default function Div({ children}:Props) {
 	return <StyledDiv>{children}</StyledDiv>
 }
 
-export function HorizontalDiv({ children }) {
+export function HorizontalDiv({ children }:Props) {
 	return <HorizontalStyledDiv>{children}</HorizontalStyledDiv>
 }
 
-export function HorizontalErrorDiv({ children }) {
+export function HorizontalErrorDiv({ children }:Props) {
 	return <HorizontalErrorStyledDiv>{children}</HorizontalErrorStyledDiv>
 }
 
-export function NavBar({ children }) {
+export function NavBar({ children }:Props) {
 	return <StyledNavBar>{children}</StyledNavBar>
 }
