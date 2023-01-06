@@ -14,14 +14,22 @@ let MenuDiv = styled("div")`
 	background-color: yellow;
 	min-height: 20px;
 	min-width: 20px;
-	visibility: ${(props:{menuVisible:boolean}) => (props.menuVisible ? "visible" : "hidden")};
+	visibility: ${(props: { menuVisible: boolean }) =>
+		props.menuVisible ? "visible" : "hidden"};
 	padding-right: 10px;
 `
 
-export function Menu(props) {
+type MenuProps = {
+	menuVisible: boolean
+	//is the below the correct syntax? aka func's val is to return a boolean...and then is void??
+	setMenuVisible: (value: boolean) => void
+	// children: React.ReactNode
+}
+// q4e, i commented out children in the above type as well as in MenuDiv component.
+export function Menu(props: MenuProps) {
 	return (
 		<MenuDiv menuVisible={props.menuVisible}>
-			{props.children}
+			{/* {props.children} */}
 			<ul>
 				<li>
 					<Link to="/">home and or default</Link>
@@ -40,8 +48,9 @@ export function Menu(props) {
 		</MenuDiv>
 	)
 }
+type handleMenuClickTypes = { handleMenuClick: () => void }
 
-export default function MenuButton(props) {
+export default function MenuButton(props: handleMenuClickTypes) {
 	return (
 		<WavesIcon
 			onClick={() => {

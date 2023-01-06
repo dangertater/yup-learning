@@ -65,7 +65,7 @@ let StyledAlert = (props: StyledAlertProps) => {
 	}
 }
 
-type ErrorAlertProps = {
+type CustomAlertProps = {
 	message: string,
 	errorVisible: string,
 	setErrorVisible: any,
@@ -73,7 +73,7 @@ type ErrorAlertProps = {
 	userPassword:string
 	//app.tsx is mad about the things in the object
 }
-export function CustomAlert(props: ErrorAlertProps) {
+export function CustomAlert(props: CustomAlertProps) {
 	return (
 		<StyledAlert
 			message={props.message}
