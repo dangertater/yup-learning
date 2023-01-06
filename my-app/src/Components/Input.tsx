@@ -9,7 +9,7 @@ let StyledInput = styled("input")`
 		color: white;
 	}
 `
-type StyledInputProps ={placeholder:string, userInfo:string,setUserInfo:Function}
+type StyledInputProps ={placeholder:string, userInfo:string, setUserInfo:Function}
 
 export default function Input(props:StyledInputProps) {
 	let theme = useTheme()
@@ -20,7 +20,8 @@ export default function Input(props:StyledInputProps) {
 				bgcolor: theme.palette.primary.main,
 			}}
 			onInput={(e) => {
-				return props.setUserInfo(e.target.value)
+				console.log(e.target)
+				return props.setUserInfo(e.target)
 			}}
 		></StyledInput>
 	)

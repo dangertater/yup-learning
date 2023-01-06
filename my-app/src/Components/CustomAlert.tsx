@@ -11,7 +11,9 @@ import { Slide } from "@mui/material"
 type StyledAlertProps = {
 	message: string,
 	errorVisible: string,
-	setErrorVisible: any
+	setErrorVisible: any,
+	userEmail:string,
+	userPassword:string
 }
 //how do i set the type of the nested child, following syntax from chatgpt 'set nested child type'
 let StyledAlert = (props: StyledAlertProps) => {
@@ -35,7 +37,7 @@ let StyledAlert = (props: StyledAlertProps) => {
 						severity="success"
 						sx={{ display: `${props.errorVisible}` }}
 					>
-						{`User successfully created! Please log in with email '${props.userDataObj.email}' and password '${props.userDataObj.password}'`}
+						{`User successfully created! Please log in with email '${props.userEmail}' and password '${props.userPassword}'`}
 					</Alert>
 				</Slide>
 			</>
@@ -67,14 +69,18 @@ type ErrorAlertProps = {
 	message: string,
 	errorVisible: string,
 	setErrorVisible: any,
+	userEmail:string
+	userPassword:string
 	//app.tsx is mad about the things in the object
 }
-export function ErrorAlert(props: ErrorAlertProps) {
+export function CustomAlert(props: ErrorAlertProps) {
 	return (
 		<StyledAlert
 			message={props.message}
 			errorVisible={props.errorVisible}
 			setErrorVisible={props.setErrorVisible}
+			userEmail={props.userEmail}
+			userPassword={props.userPassword}
 		></StyledAlert>
 	)
 }

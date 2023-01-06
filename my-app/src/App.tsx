@@ -5,7 +5,7 @@ import Input from "./Components/Input"
 import Div, { HorizontalDiv, HorizontalErrorDiv } from "./Components/Div"
 import CustomButton from "./Components/CustomButton"
 import { ValidateUser } from "./ValidateUser"
-import { ErrorAlert } from "./Components/CustomAlert"
+import { CustomAlert } from "./Components/CustomAlert"
 import { Routes, Route } from "react-router-dom"
 import {
 	getAuth,	createUserWithEmailAndPassword,
@@ -171,11 +171,13 @@ const App:React.FC = (props) =>{
 					<CustomButton errorVisible={errorVisible} onClick={logIn} buttonText={"Log In"}></CustomButton>
 				</HorizontalDiv>
 				<HorizontalErrorDiv>
-					<ErrorAlert
+					<CustomAlert
 						message={"The information entered is not valid, please resubmit."}
 						errorVisible={errorVisible}
 						setErrorVisible={setErrorVisible}
-					></ErrorAlert>
+						userEmail={email}
+						userPassword={password}
+					></CustomAlert>
 				</HorizontalErrorDiv>
 				<Routes>
 					{/* below links in MenuButton.js */}
