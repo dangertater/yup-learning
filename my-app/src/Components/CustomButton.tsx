@@ -13,7 +13,7 @@ export default function CustomButton(props: {
 		buttonDisabled = true
 	}
 	const onClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>)  => { return 'heck'
-	props.onClick(e)
+	// props.onClick(e)
 	}
 	return (
 		<Button
