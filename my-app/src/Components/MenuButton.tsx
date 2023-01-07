@@ -26,6 +26,8 @@ type MenuProps = {
 	// children: React.ReactNode
 }
 // q4e, i commented out children in the above type as well as in MenuDiv component.
+// I don't think i need props.children in the rendered component? and if I do, shouldn't the 'children: React.ReactNode' set children's type?
+// same concept worked in AuthContext.tsx on line 11,12 and 33
 export function Menu(props: MenuProps) {
 	return (
 		<MenuDiv menuVisible={props.menuVisible}>

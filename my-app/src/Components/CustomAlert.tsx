@@ -11,7 +11,7 @@ import { Slide } from "@mui/material"
 type StyledAlertProps = {
 	message: string,
 	errorVisible: string,
-	setErrorVisible: any,
+	setErrorVisible: Function,
 	userEmail:string,
 	userPassword:string
 }
@@ -68,7 +68,9 @@ let StyledAlert = (props: StyledAlertProps) => {
 type CustomAlertProps = {
 	message: string,
 	errorVisible: string,
-	setErrorVisible: any,
+	// setErrorVisible: Function,
+	//q4e - its not mad about the above line, but I believe the below line is the correct syntax?
+	setErrorVisible: (value:string) => void
 	userEmail:string
 	userPassword:string
 	//app.tsx is mad about the things in the object

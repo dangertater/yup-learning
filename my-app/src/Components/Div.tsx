@@ -25,8 +25,7 @@ let StyledNavBar = styled("div")`
 `
 type Props ={ children?:React.ReactNode}
 
-//q4e:i could convert these to props and typescript them with confidence, but nah :(
-export default function Div({ children}:Props) {
+export default function Div({ children }:Props) {
 	return <StyledDiv>{children}</StyledDiv>
 }
 

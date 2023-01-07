@@ -8,8 +8,8 @@ let AuthContext = React.createContext(null)
 export let useAuth = () => {
 	useContext(AuthContext)
 }
-
-export default function AuthProvider(props: any) {
+type AuthProviderProps={children:React.ReactNode}
+export default function AuthProvider(props: AuthProviderProps) {
 	let [theUser, setTheUser] = useState<string>()
 	//idk what below line does
 	const auth = getAuth(app)
@@ -27,7 +27,7 @@ export default function AuthProvider(props: any) {
 		//the video had me do this, idk why really
 		return unsubscribe
 	}, [])
-
+//q4e:it's mad about the above blank array, but I thought that a blank array indicated 'anything changes'
 	let value: any = { theUser }
 	return (
 		<AuthContext.Provider value={value}>{props.children}</AuthContext.Provider>
