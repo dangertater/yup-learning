@@ -2,15 +2,14 @@ import React, { useState, useContext, useEffect } from "react"
 import app from "../firebase.js"
 import { onAuthStateChanged } from "firebase/auth"
 import { getAuth } from "firebase/auth"
-
-let AuthContext = React.createContext(null)
+import { AuthContext} from "../types/contexts.js"
 
 export let useAuth = () => {
 	useContext(AuthContext)
 }
 type AuthProviderProps={children:React.ReactNode}
 export default function AuthProvider(props: AuthProviderProps) {
-	let [theUser, setTheUser] = useState<string>()
+	let [theUser, setTheUser] = useState<string>('')
 	//idk what below line does
 	const auth = getAuth(app)
 	useEffect(() => {
@@ -27,8 +26,9 @@ export default function AuthProvider(props: AuthProviderProps) {
 		//the video had me do this, idk why really
 		return unsubscribe
 	}, [])
-//q4e:it's mad about the above blank array, but I thought that a blank array indicated 'anything changes'
-	let value: any = { theUser }
+
+
+	let value: string =  theUser 
 	return (
 		<AuthContext.Provider value={value}>{props.children}</AuthContext.Provider>
 	)

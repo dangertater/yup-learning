@@ -66,7 +66,6 @@ const App:React.FC = (props) =>{
 	}
 	const app = initializeApp(firebaseAppInfoObj)
 
-	// TODO: add a setTimeout to mimic server response time
 	let createUser = async (e:unknown) => {
     let auth = getAuth(app)
 		let userData = {
@@ -76,12 +75,10 @@ const App:React.FC = (props) =>{
 			beltRank: beltRank,
 		}
 		let isValid = await ValidateUser.isValid(userData)
-		//-------
 		if (isValid) {
 			setUserDataObj(userData)
 			console.log(userDataObj)
 			setErrorVisible("userCreated")
-      //
 			createUserWithEmailAndPassword( auth, email, password)
 				.then((userCredential) => {
 					const user = userCredential.user
